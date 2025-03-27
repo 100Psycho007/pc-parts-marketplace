@@ -1,0 +1,40 @@
+{
+  "listings": [
+    {
+      "id": "1",
+      "title": "NVIDIA GeForce RTX 3070 - Like New",
+      "description": "Used for gaming only, never mined. Perfect condition with original packaging.",
+      "price": 41499,
+      "image": "https://images.pexels.com/photos/1034425/pexels-photo-1034425.jpeg",
+      "category": "Graphics Cards",
+      "condition": "Like New",
+      "promoted": true,
+      "seller": "John Doe",
+      "postedDate": "2024-01-15"
+    },
+    {
+      "id": "2",
+      "title": "Intel Core i7-12700K Processor",
+      "description": "Used for 6 months, works perfectly. Includes stock cooler.",
+      "price": 24999,
+      "image": "https://images.pexels.com/photos/1432675/pexels-photo-1432675.jpeg",
+      "category": "Processors",
+      "condition": "Good",
+      "promoted": false,
+      "seller": "Jane Smith",
+      "postedDate": "2024-01-14"
+    },
+    {
+      "id": "3",
+      "title": "32GB Corsair Vengeance RGB Pro RAM",
+      "description": "2x16GB DDR4-3600 RAM. Tested and working perfectly.",
+      "price": 7499,
+      "image": "https://images.pexels.com/photos/2582937/pexels-photo-2582937.jpeg",
+      "category": "Memory",
+      "condition": "Excellent",
+      "promoted": true,
+      "seller": "Mike Johnson",
+      "postedDate": "2024-01-13"
+    }
+  ]
+}
