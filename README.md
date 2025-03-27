@@ -15,14 +15,14 @@ A modern marketplace website for buying and selling second-hand PC parts. Built 
 
 ## Live Demo
 
-Visit the live website: [PC Parts Marketplace](https://[your-github-username].github.io/pc-parts-marketplace)
+Visit the live website: [PC Parts Marketplace](https://100Psycho007.github.io/pc-parts-marketplace)
 
 ## Deployment Steps
 
 1. Create a new repository on GitHub named `pc-parts-marketplace`
 2. Push the code to GitHub:
    ```bash
-   git remote add origin https://github.com/[your-github-username]/pc-parts-marketplace.git
+   git remote add origin https://github.com/100Psycho007/pc-parts-marketplace.git
    git branch -M main
    git push -u origin main
    ```
@@ -38,7 +38,7 @@ To run the project locally:
 
 1. Clone the repository:
    ```bash
-   git clone https://github.com/[your-github-username]/pc-parts-marketplace.git
+   git clone https://github.com/100Psycho007/pc-parts-marketplace.git
    ```
 2. Navigate to the project directory:
    ```bash
