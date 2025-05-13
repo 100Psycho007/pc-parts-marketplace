@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PC Builder - PC Parts Market</title>
+    
+    <!-- Tailwind CSS -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['Inter', 'sans-serif'],
+                    },
+                }
+            }
+        }
+    </script>
+    
+    <!-- Google Fonts -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+        
+        /* Custom scrollbar */
+        ::-webkit-scrollbar {
+            width: 8px;
+            height: 8px;
+        }
+        
+        ::-webkit-scrollbar-track {
+            background: #f1f1f1;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb {
+            background: #888;
+            border-radius: 4px;
+        }
+        
+        ::-webkit-scrollbar-thumb:hover {
+            background: #555;
+        }
+
+        /* Prevent body scroll when modal is open */
+        body.modal-open {
+            overflow: hidden;
+        }
+
+        /* Additional Tailwind utilities */
+        @layer utilities {
+            .bg-gray-50 { background-color: #F9FAFB; }
+            .bg-white { background-color: #FFFFFF; }
+            .text-gray-600 { color: #4B5563; }
+            .text-gray-700 { color: #374151; }
+            .text-gray-800 { color: #1F2937; }
+            .text-gray-900 { color: #111827; }
+        }
+    </style>
+</head>
+<body class="bg-gray-50">
+    <!-- Navigation -->
+    <nav class="bg-white shadow-lg sticky top-0 z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex justify-between h-16">
+                <div class="flex items-center">
+                    <a href="/" class="flex items-center">
+                        <i class="fas fa-microchip text-2xl text-blue-600 mr-2"></i>
+                        <span class="text-xl font-bold text-gray-800">PC Parts Market</span>
+                    </a>
+                </div>
+                <div class="flex items-center space-x-4">
+                    <button id="save-build" class="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700 transition">
+                        <i class="fas fa-save mr-2"></i>
+                        Save Build
+                    </button>
+                    <button id="share-build" class="px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                        <i class="fas fa-share-alt mr-2"></i>
+                        Share
+                    </button>
+                    <button id="new-build" class="px-4 py-2 bg-gray-600 text-white rounded-lg hover:bg-gray-700 transition">
+                        <i class="fas fa-plus mr-2"></i>
+                        New Build
+                    </button>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
+        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+            <!-- Component Selection -->
+            <div class="lg:col-span-2 space-y-6">
+                <div class="bg-white rounded-lg shadow-lg p-6">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Select Components</h2>
+                    
+                    <!-- CPU -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">CPU</h3>
+                        <div id="selected-cpu" class="mb-2">
+                            <div class="border rounded-lg bg-gray-50 p-4">
+                                No CPU selected
+                            </div>
+                        </div>
+                        <button onclick="selectComponent('cpu')" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-microchip mr-2"></i>
+                            Select CPU
+                        </button>
+                    </div>
+                    
+                    <!-- Motherboard -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Motherboard</h3>
+                        <div id="selected-motherboard" class="mb-2">
+                            <div class="border rounded-lg bg-gray-50 p-4">
+                                No motherboard selected
+                            </div>
+                        </div>
+                        <button onclick="selectComponent('motherboard')" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-server mr-2"></i>
+                            Select Motherboard
+                        </button>
+                    </div>
+                    
+                    <!-- GPU -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Graphics Card</h3>
+                        <div id="selected-gpu" class="mb-2">
+                            <div class="border rounded-lg bg-gray-50 p-4">
+                                No GPU selected
+                            </div>
+                        </div>
+                        <button onclick="selectComponent('gpu')" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-tv mr-2"></i>
+                            Select GPU
+                        </button>
+                    </div>
+                    
+                    <!-- RAM -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">RAM</h3>
+                        <div id="selected-ram" class="mb-2">
+                            <div class="border rounded-lg bg-gray-50 p-4">
+                                No RAM selected
+                            </div>
+                        </div>
+                        <button onclick="selectComponent('ram')" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-memory mr-2"></i>
+                            Select RAM
+                        </button>
+                    </div>
+                    
+                    <!-- Storage -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Storage</h3>
+                        <div id="selected-storage" class="mb-2">
+                            <div class="border rounded-lg bg-gray-50 p-4">
+                                No storage selected
+                            </div>
+                        </div>
+                        <button onclick="selectComponent('storage')" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-hdd mr-2"></i>
+                            Select Storage
+                        </button>
+                    </div>
+                    
+                    <!-- PSU -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Power Supply</h3>
+                        <div id="selected-psu" class="mb-2">
+                            <div class="border rounded-lg bg-gray-50 p-4">
+                                No PSU selected
+                            </div>
+                        </div>
+                        <button onclick="selectComponent('psu')" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-plug mr-2"></i>
+                            Select PSU
+                        </button>
+                    </div>
+                    
+                    <!-- Case -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Case</h3>
+                        <div id="selected-case" class="mb-2">
+                            <div class="border rounded-lg bg-gray-50 p-4">
+                                No case selected
+                            </div>
+                        </div>
+                        <button onclick="selectComponent('case')" class="w-full px-4 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition">
+                            <i class="fas fa-box mr-2"></i>
+                            Select Case
+                        </button>
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Build Summary -->
+            <div class="lg:col-span-1">
+                <div class="bg-white rounded-lg shadow-lg p-6 sticky top-24">
+                    <h2 class="text-2xl font-bold text-gray-800 mb-6">Build Summary</h2>
+                    
+                    <!-- Build Progress -->
+                    <div class="mb-6">
+                        <div class="flex justify-between items-center mb-2">
+                            <span class="text-sm font-medium text-gray-700">Build Progress</span>
+                            <span id="build-progress" class="text-sm font-medium text-gray-700">0%</span>
+                        </div>
+                        <div class="w-full bg-gray-200 rounded-full h-2.5">
+                            <div id="progress-bar" class="bg-blue-600 h-2.5 rounded-full transition-all duration-300" style="width: 0%"></div>
+                        </div>
+                    </div>
+                    
+                    <!-- Compatibility Check -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Compatibility</h3>
+                        <div id="compatibility-check" class="rounded-lg overflow-hidden">
+                            <!-- Compatibility status will be inserted here by JavaScript -->
+                        </div>
+                    </div>
+                    
+                    <!-- Power Consumption -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Power Consumption</h3>
+                        <div class="flex items-center text-gray-700">
+                            <i class="fas fa-bolt mr-2"></i>
+                            <span id="power-consumption">0W</span>
+                        </div>
+                    </div>
+                    
+                    <!-- Total Price -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Total Price</h3>
+                        <div class="text-3xl font-bold text-gray-900">₹<span id="total-price">0</span></div>
+                    </div>
+                    
+                    <!-- Build ID -->
+                    <div class="mb-6">
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Build ID</h3>
+                        <div id="build-id" class="font-mono text-gray-700">-</div>
+                    </div>
+                    
+                    <!-- Compare Prices -->
+                    <div>
+                        <h3 class="text-lg font-semibold text-gray-800 mb-3">Compare Prices</h3>
+                        <div class="grid grid-cols-3 gap-2">
+                            <button onclick="comparePrices('amazon')" class="flex items-center justify-center px-4 py-2 bg-yellow-400 hover:bg-yellow-500 text-white rounded-lg transition">
+                                <i class="fab fa-amazon"></i>
+                            </button>
+                            <button onclick="comparePrices('flipkart')" class="flex items-center justify-center px-4 py-2 bg-blue-500 hover:bg-blue-600 text-white rounded-lg transition">
+                                <i class="fas fa-shopping-cart"></i>
+                            </button>
+                            <button onclick="comparePrices('primeabgb')" class="flex items-center justify-center px-4 py-2 bg-red-500 hover:bg-red-600 text-white rounded-lg transition">
+                                <i class="fas fa-store"></i>
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="pc-builder.js"></script>
+    <script>
+        // Add modal-open class to body when modal is opened
+        function addModalOpenClass() {
+            document.body.classList.add('modal-open');
+        }
+
+        // Remove modal-open class from body when modal is closed
+        function removeModalOpenClass() {
+            document.body.classList.remove('modal-open');
+        }
+
+        // Initialize the build
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('Initializing PC Builder...');
+            initializePCBuilder();
+        });
+
+        // Handle new build button
+        document.getElementById('new-build').addEventListener('click', () => {
+            if (confirm('Are you sure you want to start a new build? This will clear your current build.')) {
+                initializePCBuilder();
+            }
+        });
+    </script>
+</body>
+</html> 
